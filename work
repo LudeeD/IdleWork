@@ -1,0 +1,71 @@
+#!/bin/bash
+# The Ultimate Work
+
+# Trap Signals to exit tight loops
+trap "echo 'Go Ahead And Continue Procastinating'; exit" SIGHUP SIGINT SIGTERM
+
+### Functions ###
+
+function _simpleWork {
+    cat '/dev/urandom' | hexdump | grep --color "ca fe"
+}
+
+function _endlessTests {
+    files=/usr/lib/*
+    for f in $files; do
+        echo -e "\x1B[1;34m==================================================="
+        echo -e "Entering $f\x1b[0m"
+        nTimes=$RANDOM
+        let nTimes=($nTimes % 5)
+        i=0
+        while [ $i -lt $nTimes ]; do
+            echo -e "Performing Test Number $i"
+            nTime=$RANDOM
+            sleep .$[ ( $nTime % 10 ) + 1 ]s
+            echo -e "Ran in 0.$nTime seconds, no errors! Continue..."
+            let i=$i+1
+        done
+    done
+}
+
+function _statusBar() {
+    files=/usr/bin/*
+    for f in $files; do
+        echo -e "\x1B[1;34mAnalysing $f\x1b[0m"
+        bsize=4096
+        r_rate=$(echo "$RANDOM/32767 * $bsize * 1.5 + $bsize / 4" | bc -l | sed 's/\..*$//')
+        r_min=3
+        r_max=15
+        r_val=$(($r_min + $RANDOM % $(($r_max - $r_min)) ))
+        i=0
+        dd if=/dev/urandom bs=$bsize count=$r_val 2> /dev/null | pv -L $bsize -s $(($r_val * bsize)) > /dev/null
+        echo -e "Complete, \x1B[31merrors found: $r_val\x1b[0m \x1B[32mcorrected: $r_val\x1b[0m"
+    done
+}
+
+function _networkTest() {
+    while [ 1 ]; do
+        traceroute 163.152.6.2
+        sleep 2
+        echo -e "\x1B[31mFailed!\x1b[0m"
+        ping -c 5 108.168.185.170
+        sleep 1
+    done
+}
+
+clear
+x=$RANDOM
+let x=($x % 4)+1
+
+case $x in
+    1)
+        _simpleWork;;
+    2)
+        _endlessTests;;
+    3)
+        _statusBar;;
+    4)
+        _networkTest;;
+esac
+
+
