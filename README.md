@@ -9,7 +9,7 @@ Useful script to make you look like you're working and also look awesome doing s
 
 If you can relate to any of the situations described above, this script is for you.
 
-#### What do IdleWork Offers?
+#### What does IdleWork Offers?
 You will have 4 possible outputs, random choice. (So it's not always the same trick)
 
 1. The Eternal CaFe search
