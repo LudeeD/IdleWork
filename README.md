@@ -1,4 +1,4 @@
-# IdleWork
+# IdleWork [![Build Status](https://travis-ci.org/LudeeD/IdleWork.svg?branch=master)](https://travis-ci.org/LudeeD/IdleWork)
 Useful script to make you look like you're working and also look awesome doing so.
 
 + You're in a classroom, not doing what you're supposed to, and your teacher is approaching you... You open the terminal and all you can do is write "ls" in the home directory. The teacher gives you THAT unimpressed look.
